@@ -2,7 +2,7 @@
 	"name": "ds_BreedDim_Seattle",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Snowflake1",
+			"referenceName": "ls Snowflake",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -36,7 +36,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "TMEMP_SCHEMA",
+			"schema": "TEMP_SCHEMA",
 			"table": "BREED_DIM"
 		}
 	},

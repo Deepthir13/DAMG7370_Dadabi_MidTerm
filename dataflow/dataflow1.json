@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DataFlow_Parquet_NYPD",
+						"referenceName": "Parquet_altryx",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable_NYPD",
+						"referenceName": "SnowflakeNYPD2",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -41,18 +41,18 @@
 				"          AGE_GROUP as string,",
 				"          PERP_SEX as string,",
 				"          PERP_RACE as string,",
-				"          X_COORD_CD as double,",
-				"          Y_COORD_CD as double,",
-				"          Latitude as string,",
-				"          Longitude as string,",
-				"          {New Georeferenced Column} as string,",
+				"          X_COORD_CD as long,",
+				"          Y_COORD_CD as long,",
+				"          LATITUDE as float,",
+				"          LONGITUDE as float,",
+				"          GEOREFERENCED as string,",
 				"          ARREST_DATE_Formatted as date",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> source1",
-				"source1 derive(ARREST_DATE_Formatted = toString(ARREST_DATE_Formatted, \"yyyy-MM-dd HH:mm:ss\")) ~> derivedColumn1",
+				"source1 derive(ARREST_DATE_Formatted = toString(ARREST_DATE_Formatted,\"yyyy-MM-dd HH:mm:ss\")) ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",

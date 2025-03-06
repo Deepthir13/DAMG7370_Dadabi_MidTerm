@@ -18,7 +18,7 @@
 						"referenceName": "ds_LocationDim_Seattle",
 						"type": "DatasetReference"
 					},
-					"name": "sinkLocationDim"
+					"name": "SinkLocationDim"
 				}
 			],
 			"transformations": [
@@ -26,7 +26,7 @@
 					"name": "surrogateKey"
 				},
 				{
-					"name": "derivedColumn"
+					"name": "derivedColumns"
 				}
 			],
 			"scriptLines": [
@@ -48,8 +48,8 @@
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey",
 				"surrogateKey derive(DI_CREATED_DT = currentTimestamp(),",
-				"          DI_JOB_ID = $JobID) ~> derivedColumn",
-				"derivedColumn sink(allowSchemaDrift: false,",
+				"          DI_JOB_ID = $JobID) ~> derivedColumns",
+				"derivedColumns sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
 				"          LOCATION_SK as decimal(10,0),",
@@ -65,15 +65,17 @@
 				"     upsertable:false,",
 				"     truncate:true,",
 				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
 				"     stageInsert: true,",
 				"     mapColumn(",
 				"          LOCATION_SK = SK_ID,",
+				"          CITY = city,",
 				"          STATE = state,",
 				"          ZIP_CODE = zipcode,",
-				"          CITY = city,",
 				"          DI_JOB_ID,",
 				"          DI_LOAD_DT = DI_CREATED_DT",
-				"     )) ~> sinkLocationDim"
+				"     )) ~> SinkLocationDim"
 			]
 		}
 	}

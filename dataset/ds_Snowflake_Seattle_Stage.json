@@ -1,5 +1,5 @@
 {
-	"name": "ds_LocationDim_Seattle",
+	"name": "ds_Snowflake_Seattle_Stage",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls Snowflake",
@@ -9,17 +9,27 @@
 		"type": "SnowflakeV2Table",
 		"schema": [
 			{
-				"name": "LOCATION_SK",
-				"type": "NUMBER",
-				"precision": 10,
-				"scale": 0
+				"name": "LICENSE_ISSUE_DATE",
+				"type": "DATE"
 			},
 			{
-				"name": "CITY",
+				"name": "LICENSE_NUMBER",
 				"type": "VARCHAR"
 			},
 			{
-				"name": "STATE",
+				"name": "ANIMAL_NAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SPECIES",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "PRIMARY_BREED",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SECONDARY_BREED",
 				"type": "VARCHAR"
 			},
 			{
@@ -37,7 +47,7 @@
 		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "LOCATION_DIM"
+			"table": "V2_PET_LICENSE_STAGE"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
