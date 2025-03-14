@@ -1,0 +1,80 @@
+{
+	"name": "csv_to_rows_IMDb",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_Names_Basics_IMDb",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Name_Basics_Cleaned",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "flatten1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          nconst as string,",
+				"          primaryName as string,",
+				"          birthYear as string,",
+				"          deathYear as string,",
+				"          primaryProfession as string,",
+				"          knownForTitles as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(knownForTitles = split(knownForTitles, ','),",
+				"          primaryProfession = split(primaryProfession,',')) ~> derivedColumn1",
+				"derivedColumn1 foldDown(unrollMultiple(knownForTitles,primaryProfession),",
+				"     mapColumn(",
+				"          nconst,",
+				"          primaryName,",
+				"          birthYear,",
+				"          deathYear,",
+				"          primaryProfession,",
+				"          knownForTitles",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          NCONST as string,",
+				"          PRIMARYNAME as string,",
+				"          BIRTHYEAR as string,",
+				"          DEATHYEAR as string,",
+				"          PRIMARYPROFESSION as string,",
+				"          KNOWNFORTITLES as string,",
+				"          JOB_ID as string,",
+				"          CREATED_DATE as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true) ~> sink1"
+			]
+		}
+	}
+}
