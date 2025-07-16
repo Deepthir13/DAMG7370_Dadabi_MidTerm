@@ -1,4 +1,4 @@
-IMDB
+
 # 🎬 IMDb Movie & Series BI Pipeline Project
 
 🔗 **[Tableau Dashboards Coming Soon]**
