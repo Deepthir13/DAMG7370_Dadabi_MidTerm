@@ -1,8 +1,6 @@
 
 # 🎬 IMDb Movie & Series BI Pipeline Project
 
-🔗 **[Tableau Dashboards Coming Soon]**
-
 ---
 
 ## 📝 Project Overview
@@ -48,7 +46,7 @@ This project showcases my **end-to-end BI and data engineering skills** by trans
 ## 🛠️ Tech Stack
 
 - **Profiling & Cleaning:** Alteryx, Python, YData Profiler  
-- **ETL & Pipelines:** Azure Data Factory, SQL, Alteryx  
+- **ETL & Pipelines:** Azure Data Factory,Hadoop, SQL, Alteryx  
 - **Data Warehouse:** Snowflake (Medallion Architecture)  
 - **Modeling:** ER Studio (Star Schema)  
 - **Visualization:** Tableau
